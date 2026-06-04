@@ -1,0 +1,31 @@
+// Actor hierarchy
+actor Admin
+actor Manager inherits Admin
+actor Employee inherits Manager
+
+// Assets
+asset Database
+asset FileServer
+
+// Operations
+operation Read
+operation Write
+operation Delete
+
+// Policy Definition
+policy CorporateAccess {
+    scope Admin {
+        allow Read on Database
+        allow Write on Database
+        allow Delete on Database
+    }
+    
+    scope Manager {
+        allow Read on FileServer
+        allow Write on FileServer
+    }
+    
+    scope Employee {
+        allow Read on FileServer
+    }
+}

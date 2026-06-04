@@ -1,0 +1,28 @@
+#This file is the engine of your Xtext project. It is responsible for generating the infrastructure (parser, metamodel, etc.) based on your grammar. It is located in gse.xtext.assignment/src/gse/xtext/assignment/GenerateAccessPolicies.mwe2
+
+module gse.xtext.assignment.GenerateAccessPolicies
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.build.GeneratorModule
+
+workflow {
+    bean = StandaloneSetup {
+        scanClassPath = true
+    }
+
+    component = org.eclipse.xtext.xtext.generator.GeneratorComponent {
+        register = org.eclipse.xtext.xtext.generator.LanguageConfig {
+            uri = "platform:/resource/gse.xtext.assignment/src/gse/xtext/assignment/AccessPolicies.xtext"
+            
+            // Generate standard Xtext components
+            fileExtensions = "rbac"
+            
+            // This links your custom generator
+            generator = {
+                outlet = {
+                    path = "./src-gen"
+                }
+            }
+        }
+    }
+}
